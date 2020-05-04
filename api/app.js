@@ -1,8 +1,12 @@
 "use strict";
 
 // Load modules
+const cors = require("cors");
 const express = require("express");
 const morgan = require("morgan");
+
+// Enable All CORS Requests
+app.use(cors());
 
 // Load database
 const db = require("./db");
@@ -42,7 +46,7 @@ console.log("Testing the connection to the database...");
     console.log("The app is running correctly");
   } catch (error) {
     if (error.name === "SequelizeValidationError") {
-      const errors = error.errors.map(err => err.message);
+      const errors = error.errors.map((err) => err.message);
       console.error("Validation errors: ", errors);
     } else {
       throw error;
@@ -53,7 +57,7 @@ console.log("Testing the connection to the database...");
 // send 404 if no other route matched
 app.use((req, res) => {
   res.status(404).json({
-    message: "Route Not Found"
+    message: "Route Not Found",
   });
 });
 
@@ -65,7 +69,7 @@ app.use((err, req, res, next) => {
 
   res.status(err.status || 500).json({
     message: err.message,
-    error: {}
+    error: {},
   });
 });
 
