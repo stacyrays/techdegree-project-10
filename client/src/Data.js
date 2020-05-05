@@ -23,16 +23,12 @@ export default class Data {
   }
 
   async getCourses() {
-    const response = await this.api(`/courses`, "GET");
+    const response = await this.api("/courses", "GET");
     if (response.status === 200) {
-      console.log(
-        "RESPONSE IS BRINGING BACK THIS... " +
-          response.json().then((data) => data)
-      );
-      //return response.json().then((data) => data);
+      return response.json().then((data) => data);
     } else if (response.status === 401) {
-      console.log("RESPONSE IS NULL ");
-      //return null;
+      //console.log("RESPONSE IS NULL ");
+      return null;
     } else {
       throw new Error();
     }
