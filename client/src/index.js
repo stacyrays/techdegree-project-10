@@ -4,6 +4,7 @@ import "./index.css";
 import { Provider } from "./Context";
 import App from "./App";
 //import * as serviceWorker from './serviceWorker';
+import "./styles/global.css";
 
 ReactDOM.render(
   <Provider>
