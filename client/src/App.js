@@ -8,12 +8,14 @@ import Courses from "./components/Courses";
 import CourseDetail from "./components/CourseDetail";
 import UserSignIn from "./components/UserSignIn";
 import UserSignUp from "./components/UserSignUp";
+import CreateCourse from "./components/CreateCourse";
 
 const HeaderWithContext = withContext(Header);
 const CoursesWithContext = withContext(Courses);
 const CourseDetailWithContext = withContext(CourseDetail);
 const UserSignInWithContext = withContext(UserSignIn);
 const UserSignUpWithContext = withContext(UserSignUp);
+const CreateCourseWithContext = withContext(CreateCourse);
 
 export default () => (
   <Router>
@@ -23,7 +25,8 @@ export default () => (
         <Route exact path="/" component={CoursesWithContext} />
         <Route exact path="/courses/:id" component={CourseDetailWithContext} />
         <Route exact path="/signin" component={UserSignInWithContext} />
-        <Route path="/signup" component={UserSignUpWithContext} />
+        <Route exact path="/signup" component={UserSignUpWithContext} />
+        <Route exact path="/create" component={CreateCourseWithContext} />
         {/* <PrivateRoute path="/authenticated" component={AuthWithContext} />
         <Route path="/signout" component={UserSignOutWithContext} />
         <Route component={NotFound} /> */}

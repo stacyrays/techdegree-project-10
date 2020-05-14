@@ -14,6 +14,7 @@ export default class UserSignIn extends Component {
 
     const { context } = this.props;
     const authUser = context.authenicateUser;
+    //console.log("What is auth user?" + authUser);
 
     return (
       <div className="bounds">
