@@ -41,7 +41,6 @@ export default class Data {
     if (response.status === 200) {
       return response.json().then((data) => data);
     } else if (response.status === 401) {
-      //console.log("RESPONSE IS NULL ");
       return null;
     } else {
       throw new Error();
