@@ -48,16 +48,16 @@ const authenticateUser = async (req, res, next) => {
       );
       if (authenticated) {
         console.log(
-          `Authentication successful for username: ${user.emailAddress}`
+          `Authentication successful for emailAddress: ${user.emailAddress}`
         );
 
         // Store the authenticated user on the Request object
         req.currentUser = user;
       } else {
-        message = `Authentication failure for username: ${user.emailAddress}`;
+        message = `Authentication failure for emailAddress: ${user.emailAddress}`;
       }
     } else {
-      message = `User not found for username: ${credentials.emailAddress}`;
+      message = `User not found for emailAddress: ${credentials.emailAddress}`;
     }
   } else {
     message = "Auth header not found";

@@ -20,6 +20,9 @@ export default class CreateCourse extends Component {
       errors,
     } = this.state;
 
+    const { context } = this.props;
+    const authUser = context.authenticatedUser;
+
     return (
       <div className="bounds">
         <div className="grid-33 centered signin">
@@ -88,6 +91,9 @@ export default class CreateCourse extends Component {
 
   submit = () => {
     const { context } = this.props;
+    const authUser = context.authenticatedUser;
+    const { emailAddress, password } = authUser;
+
     const { title, description, estimatedTime, materialsNeeded } = this.state;
 
     // Create course
@@ -98,13 +104,17 @@ export default class CreateCourse extends Component {
       materialsNeeded,
     };
 
+    const { from } = this.props.location.state || { from: { pathname: "/" } };
+
     context.data
-      .createCourse(course)
-      .then((errors) => {
-        if (errors.length) {
-          this.setState({ errors });
+      .createCourse(course, emailAddress, password)
+      .then((response) => {
+        if (response !== null) {
+          this.setState({ errors: response });
+          console.log("resonse is null");
         } else {
-          this.props.history.push("/");
+          console.log(`The course ${title} is created`);
+          this.props.history.push(from);
         }
       })
       .catch((err) => {

@@ -47,20 +47,24 @@ export default class Data {
     }
   }
 
-  async createCourse(course) {
-    const response = await this.api(`/courses`, "POST");
+  async createCourse(course, emailAddress, password) {
+    const response = await this.api(`/courses`, "POST", course, true, {
+      emailAddress,
+      password,
+    });
     if (response.status === 201) {
-      return [];
+      return null;
     } else if (response.status === 400) {
       return response.json().then((data) => {
+        console.log("POST on createCourse 400 response");
         return data.errors;
       });
     } else {
-      throw new Error();
+      throw new Error("Error not specified");
     }
   }
 
-  async updateCourse() {
+  async updateCourse(course) {
     const response = await this.api(`/courses/:id`, "PUT");
     if (response.status === 204) {
       return [];
@@ -78,7 +82,6 @@ export default class Data {
     if (response.status === 204) {
       return [];
     } else if (response.status === 403) {
-      //console.log("RESPONSE IS NULL ");
       return null;
     } else {
       throw new Error();

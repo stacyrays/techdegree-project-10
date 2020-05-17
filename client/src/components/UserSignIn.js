@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import Form from "./Form";
 
 export default class UserSignIn extends Component {
@@ -14,45 +14,49 @@ export default class UserSignIn extends Component {
 
     const { context } = this.props;
     const authUser = context.authenicateUser;
-    //console.log("What is auth user?" + authUser);
+    console.log("the authUser is " + authUser);
 
-    return (
-      <div className="bounds">
-        <div className="grid-33 centered signin">
-          <h1>Sign In</h1>
-          <Form
-            cancel={this.cancel}
-            errors={errors}
-            submit={this.submit}
-            submitButtonText="Sign In"
-            elements={() => (
-              <React.Fragment>
-                <input
-                  id="emailAddress"
-                  name="emailAddress"
-                  type="text"
-                  value={emailAddress}
-                  onChange={this.change}
-                  placeholder="User Name"
-                />
-                <input
-                  id="password"
-                  name="password"
-                  type="password"
-                  value={password}
-                  onChange={this.change}
-                  placeholder="Password"
-                />
-              </React.Fragment>
-            )}
-          />
-          <p>
-            Don't have a user account? <Link to="/signup">Click here</Link> to
-            sign up!
-          </p>
+    if (!authUser) {
+      return (
+        <div className="bounds">
+          <div className="grid-33 centered signin">
+            <h1>Sign In</h1>
+            <Form
+              cancel={this.cancel}
+              errors={errors}
+              submit={this.submit}
+              submitButtonText="Sign In"
+              elements={() => (
+                <React.Fragment>
+                  <input
+                    id="emailAddress"
+                    name="emailAddress"
+                    type="text"
+                    value={emailAddress}
+                    onChange={this.change}
+                    placeholder="User Name"
+                  />
+                  <input
+                    id="password"
+                    name="password"
+                    type="password"
+                    value={password}
+                    onChange={this.change}
+                    placeholder="Password"
+                  />
+                </React.Fragment>
+              )}
+            />
+            <p>
+              Don't have a user account? <Link to="/signup">Click here</Link> to
+              sign up!
+            </p>
+          </div>
         </div>
-      </div>
-    );
+      );
+    } else {
+      return <Redirect to={"/"} />;
+    }
   }
 
   change = (event) => {
