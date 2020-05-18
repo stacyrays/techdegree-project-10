@@ -8,6 +8,7 @@ export default class CreateCourse extends Component {
     description: "",
     estimatedTime: "",
     materialsNeeded: "",
+    userId: "",
     errors: [],
   };
 
@@ -17,6 +18,7 @@ export default class CreateCourse extends Component {
       description,
       estimatedTime,
       materialsNeeded,
+      userId,
       errors,
     } = this.state;
 
@@ -66,6 +68,14 @@ export default class CreateCourse extends Component {
                   onChange={this.change}
                   placeholder="Materials Needed"
                 />
+                <input
+                  id="userId"
+                  name="userId"
+                  type="text"
+                  value={userId}
+                  onChange={this.change}
+                  placeholder="Enter user id number"
+                />
               </React.Fragment>
             )}
           />
@@ -94,7 +104,13 @@ export default class CreateCourse extends Component {
     const authUser = context.authenticatedUser;
     const { emailAddress, password } = authUser;
 
-    const { title, description, estimatedTime, materialsNeeded } = this.state;
+    const {
+      title,
+      description,
+      estimatedTime,
+      materialsNeeded,
+      userId,
+    } = this.state;
 
     // Create course
     const course = {
@@ -102,6 +118,7 @@ export default class CreateCourse extends Component {
       description,
       estimatedTime,
       materialsNeeded,
+      userId,
     };
 
     const { from } = this.props.location.state || { from: { pathname: "/" } };
