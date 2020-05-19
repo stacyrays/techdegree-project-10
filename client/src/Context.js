@@ -43,7 +43,7 @@ export class Provider extends Component {
       Cookies.set("authenticatedUser", JSON.stringify(user), cookieOptions);
       console.log(`Cookie set on ${user.emailAddress}`);
     }
-
+    console.log(`The user is ${user.emailAddress}`);
     return user;
   };
 

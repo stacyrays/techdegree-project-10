@@ -204,7 +204,7 @@ router.get(
 // Post course
 router.post(
   "/courses",
-  //authenticateUser,
+  authenticateUser,
   [
     check("title").exists().withMessage('Please provide a value for "title"'),
     check("description")
