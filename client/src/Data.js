@@ -1,49 +1,58 @@
 import config from "./config";
 
 export default class Data {
+  //! first method
+  //* API endpoint = 'path'
   api(
     path,
     method = "GET",
     body = null,
-    requiresAuth = false,
+    requireAuth = false,
     credentials = null
   ) {
     const url = config.apiBaseUrl + path;
-
     const options = {
       method,
       headers: {
         "Content-Type": "application/json; charset=utf-8",
       },
     };
-
+    //! if body is provided, sends "method", "headers" and "stringified body".
     if (body !== null) {
       options.body = JSON.stringify(body);
     }
-
-    if (requiresAuth) {
+    // Check if authentication is required
+    if (requireAuth) {
       const encodedCredentials = btoa(
-        `${credentials.username}:${credentials.password}`
+        `${credentials.emailAddress}:${credentials.password}`
       );
+      // push authentication to header
       options.headers["Authorization"] = `Basic ${encodedCredentials}`;
     }
     return fetch(url, options);
   }
 
-  async getUser(username, password) {
-    const response = await this.api(`/users`, "GET", null, true, {
-      username,
+  async getUser(emailAddress, password) {
+    const res = await this.api(`/users`, "GET", null, true, {
+      emailAddress,
       password,
     });
-    if (response.status === 200) {
-      return response.json().then((data) => data);
-    } else if (response.status === 401) {
-      return null;
+    if (res.status === 200) {
+      return res.json().then((data) => {
+        return data;
+      });
+    } else if (res.status === 400 || res.status === 401) {
+      return res.json().then((data) => {
+        console.log(
+          `[GET][Data][getUser] ${res.status} - Errors: `,
+          data.errors
+        );
+        return data.errors;
+      });
     } else {
-      throw new Error();
+      throw new Error("[GET][Data][getUser] Unknown Error");
     }
   }
-
   async createUser(user) {
     const response = await this.api("/users", "POST", user);
     if (response.status === 201) {
@@ -85,7 +94,7 @@ export default class Data {
       password,
     });
     if (response.status === 201) {
-      return null;
+      return [];
     } else if (response.status === 400) {
       return response.json().then((data) => {
         console.log("POST on createCourse 400 response");

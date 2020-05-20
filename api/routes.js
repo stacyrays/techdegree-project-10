@@ -46,6 +46,7 @@ const authenticateUser = async (req, res, next) => {
         credentials.pass,
         user.password
       );
+      console.log("The user is " + user);
       if (authenticated) {
         console.log(
           `Authentication successful for emailAddress: ${user.emailAddress}`
@@ -53,6 +54,7 @@ const authenticateUser = async (req, res, next) => {
 
         // Store the authenticated user on the Request object
         req.currentUser = user;
+        //console.log("CURRENT USER IS " + user);
       } else {
         message = `Authentication failure for emailAddress: ${user.emailAddress}`;
       }
