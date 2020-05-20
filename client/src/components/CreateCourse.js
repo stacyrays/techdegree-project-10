@@ -22,11 +22,10 @@ export default class CreateCourse extends Component {
 
     const { context } = this.props;
     const authUser = context.authenticatedUser;
-    const { emailAddress, password } = authUser;
 
-    console.log(context.authenticatedUser);
-    console.log(`The authUser is ${emailAddress}`);
-    console.log(`The authUser is ${password}`);
+    console.log(authUser);
+    console.log(`The email is ${authUser.emailAddress}`);
+    console.log(`The password is ${authUser.password}`);
 
     return (
       <div className="bounds course--detail">
@@ -50,7 +49,9 @@ export default class CreateCourse extends Component {
                     placeholder="Title"
                     className="input-title course--title--input"
                   />
-                  <p>By Joe Smith</p>
+                  <p>
+                    By: {authUser.firstName} {authUser.lastName}
+                  </p>
                 </div>
                 <div className="course--description">
                   <div>
@@ -119,15 +120,8 @@ export default class CreateCourse extends Component {
     const { context } = this.props;
     const authUser = context.authenticatedUser;
     const { emailAddress, password } = authUser;
-    console.log(authUser);
 
-    const {
-      title,
-      description,
-      estimatedTime,
-      materialsNeeded,
-      userId,
-    } = this.state;
+    const { title, description, estimatedTime, materialsNeeded } = this.state;
 
     // Create course
     const course = {
@@ -135,17 +129,17 @@ export default class CreateCourse extends Component {
       description,
       estimatedTime,
       materialsNeeded,
-      userId,
     };
 
-    const { from } = this.props.location.state || { from: { pathname: "/" } };
+    const { from } = this.props.location.state || {
+      from: { pathname: "/" },
+    };
 
     context.data
       .createCourse(course, emailAddress, password)
       .then((response) => {
         if (response !== null) {
           this.setState({ errors: response });
-          console.log("resonse is null");
         } else {
           console.log(`The course ${title} is created`);
           this.props.history.push(from);

@@ -1,9 +1,9 @@
 "use strict";
 
 // Load modules
-const cors = require("cors");
 const express = require("express");
 const morgan = require("morgan");
+const cors = require("cors");
 
 // Create the Express app.
 const app = express();

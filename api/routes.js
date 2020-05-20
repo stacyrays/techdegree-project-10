@@ -203,7 +203,7 @@ router.get(
   })
 );
 
-// Post course
+//Post course
 router.post(
   "/courses",
   authenticateUser,
@@ -225,8 +225,10 @@ router.post(
       // Return the validation errors to the client.
       return res.status(400).json({ errors: errorMessages });
     } else {
-      const course = await Course.create(req.body);
-      res.location(`courses/${course.id}`);
+      const courseData = req.body;
+      courseData.userId = parseInt(req.currentUser.id);
+      const course = await Course.create(courseData);
+      res.location(`/courses/${course.id}`);
       res.status(201).end();
     }
   })

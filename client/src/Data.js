@@ -93,8 +93,9 @@ export default class Data {
       emailAddress,
       password,
     });
+    console.log("create course is triggered");
     if (response.status === 201) {
-      return [];
+      return null;
     } else if (response.status === 400) {
       return response.json().then((data) => {
         console.log("POST on createCourse 400 response");
