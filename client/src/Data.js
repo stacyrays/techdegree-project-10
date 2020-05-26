@@ -93,7 +93,7 @@ export default class Data {
       emailAddress,
       password,
     });
-    console.log("create course is triggered");
+    //console.log("create course is triggered");
     if (response.status === 201) {
       return null;
     } else if (response.status === 400) {
@@ -107,12 +107,18 @@ export default class Data {
   }
 
   async updateCourse(course, emailAddress, password) {
-    const response = await this.api(`/courses/:id`, "PUT", course, true, {
-      emailAddress,
-      password,
-    });
+    const response = await this.api(
+      `/courses/${course.id}`,
+      "PUT",
+      course,
+      true,
+      {
+        emailAddress,
+        password,
+      }
+    );
     if (response.status === 204) {
-      return [];
+      return null;
     } else if (response.status === 403) {
       return response.json().then((data) => {
         return data.errors;

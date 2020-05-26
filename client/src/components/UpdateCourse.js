@@ -29,7 +29,6 @@ export default class CreateCourse extends Component {
   }
   render() {
     const { course, owner, errors } = this.state;
-    const { title, description, estimatedTime, materialsNeeded } = course;
     const { firstName, lastName } = owner;
 
     console.log("This is owner variable firstname of state " + firstName);
@@ -64,9 +63,8 @@ export default class CreateCourse extends Component {
                       id="title"
                       name="title"
                       type="text"
-                      value={title}
-                      onChange={this.change}
-                      placeholder="Title"
+                      ref={(input) => (this.title = input)}
+                      defaultValue={course.title}
                       className="input-title course--title--input"
                     />
                     <p>
@@ -79,9 +77,8 @@ export default class CreateCourse extends Component {
                         id="description"
                         name="description"
                         type="text"
-                        value={description}
-                        onChange={this.change}
-                        placeholder="Description"
+                        ref={(input) => (this.description = input)}
+                        defaultValue={course.description}
                       ></textarea>
                     </div>
                   </div>
@@ -96,9 +93,8 @@ export default class CreateCourse extends Component {
                             id="estimatedTime"
                             name="estimatedTime"
                             type="text"
-                            value={estimatedTime}
-                            onChange={this.change}
-                            placeholder="Estimated Time"
+                            ref={(input) => (this.estimatedTime = input)}
+                            defaultValue={course.estimatedTime}
                             className="course--time--input"
                           />
                         </div>
@@ -110,9 +106,8 @@ export default class CreateCourse extends Component {
                             id="materialsNeeded"
                             name="materialsNeeded"
                             type="text"
-                            value={materialsNeeded}
-                            onChange={this.change}
-                            placeholder="Materials Needed"
+                            ref={(input) => (this.materialsNeeded = input)}
+                            defaultValue={course.materialsNeeded}
                             className="course--materials--input"
                           ></textarea>
                         </div>
@@ -128,30 +123,22 @@ export default class CreateCourse extends Component {
     );
   }
 
-  change = (event) => {
-    const name = event.target.name;
-    const value = event.target.value;
-
-    this.setState(() => {
-      return {
-        [name]: value,
-      };
-    });
-  };
-
   submit = () => {
+    //evt.preventDefault();
     const { context } = this.props;
     const authUser = context.authenticatedUser;
     const { emailAddress, password } = authUser;
+    //const { errors } = this.state;
 
-    const { title, description, estimatedTime, materialsNeeded } = this.state;
+    const { title, description, estimatedTime, materialsNeeded } = this;
 
     // Updatecourse
     const course = {
-      title,
-      description,
-      estimatedTime,
-      materialsNeeded,
+      title: title.value,
+      description: description.value,
+      estimatedTime: estimatedTime.value,
+      materialsNeeded: materialsNeeded.value,
+      id: this.state.course.id,
     };
 
     const { from } = this.props.location.state || {
@@ -165,7 +152,7 @@ export default class CreateCourse extends Component {
           this.setState({ errors: response });
         } else {
           console.log(`The course ${title} is created`);
-          this.props.history.push(from);
+          this.props.history.push(`/courses/${this.state.course.id}`);
         }
       })
       .catch((err) => {

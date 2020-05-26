@@ -33,7 +33,7 @@ export default class CreateCourse extends Component {
         <div>
           <div>
             <h2 className="validation--errors--label">Validation errors</h2>
-            <div className="validation-errors">
+            <div class="validation-errors">
               <ul>
                 <li>Please provide a value for "Title"</li>
                 <li>Please provide a value for "Description"</li>
