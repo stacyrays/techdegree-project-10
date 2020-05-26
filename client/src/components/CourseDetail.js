@@ -1,18 +1,22 @@
 import React, { Component } from "react";
-//import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default class CourseDetail extends Component {
   state = {
     course: {},
-    //owner: {},
+    owner: {},
+    errors: [],
   };
   async componentDidMount() {
     try {
       const { context } = this.props;
       const course = await context.data.getCourse(this.props.match.params.id);
+      const owner = course.owner;
+      console.log("This is the course " + course.owner.firstName);
+      //console.log(context.data.title);
 
       if (course) {
-        this.setState({ course });
+        this.setState({ course, owner });
       } else {
         console.log("there is an error 404");
         this.props.history.push("/notfound");
@@ -23,8 +27,12 @@ export default class CourseDetail extends Component {
     }
   }
   render() {
-    const { course } = this.state;
+    const { course, owner, errors } = this.state;
     const { title, description, estimatedTime, materialsNeeded } = course;
+    const { firstName, lastName } = owner;
+
+    const { context } = this.props;
+    const authUser = context.authenticatedUser;
 
     return (
       <div>
@@ -32,9 +40,9 @@ export default class CourseDetail extends Component {
           <div className="bounds">
             <div className="grid-100">
               <span>
-                <a className="button" href="update-course.html">
+                <Link className="button" to={`/update/${course.id}`}>
                   Update Course
-                </a>
+                </Link>
                 <a className="button" onClick={this.deleteCourse}>
                   Delete Course
                 </a>
@@ -50,7 +58,9 @@ export default class CourseDetail extends Component {
             <div className="course--header">
               <h4 className="course--label">Course</h4>
               <h3 className="course--title">{title}</h3>
-              <p>By Joe Smith</p>
+              <p>
+                By: {firstName} {lastName}
+              </p>
             </div>
             <div className="course--description">
               <p>{description}</p>

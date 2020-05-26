@@ -30,39 +30,50 @@ export default class CreateCourse extends Component {
     return (
       <div className="bounds course--detail">
         <h1>Create Course</h1>
-        <Form
-          cancel={this.cancel}
-          errors={errors}
-          submit={this.submit}
-          submitButtonText="Create Course"
-          elements={() => (
-            <React.Fragment>
-              <div className="grid-66">
-                <div className="course--header">
-                  <h4 className="course--label">Course</h4>
-                  <input
-                    id="title"
-                    name="title"
-                    type="text"
-                    value={title}
-                    onChange={this.change}
-                    placeholder="Title"
-                    className="input-title course--title--input"
-                  />
-                  <p>
-                    By: {authUser.firstName} {authUser.lastName}
-                  </p>
-                </div>
-                <div className="course--description">
-                  <div>
-                    <textarea
-                      id="description"
-                      name="description"
+        <div>
+          <div>
+            <h2 className="validation--errors--label">Validation errors</h2>
+            <div className="validation-errors">
+              <ul>
+                <li>Please provide a value for "Title"</li>
+                <li>Please provide a value for "Description"</li>
+              </ul>
+            </div>
+          </div>
+          <Form
+            cancel={this.cancel}
+            errors={errors}
+            submit={this.submit}
+            submitButtonText="Create Course"
+            elements={() => (
+              <React.Fragment>
+                <div className="grid-66">
+                  <div className="course--header">
+                    <h4 className="course--label">Course</h4>
+                    <input
+                      id="title"
+                      name="title"
                       type="text"
-                      value={description}
+                      value={title}
                       onChange={this.change}
-                      placeholder="Description"
-                    ></textarea>
+                      placeholder="Title"
+                      className="input-title course--title--input"
+                    />
+                    <p>
+                      By: {authUser.firstName} {authUser.lastName}
+                    </p>
+                  </div>
+                  <div className="course--description">
+                    <div>
+                      <textarea
+                        id="description"
+                        name="description"
+                        type="text"
+                        value={description}
+                        onChange={this.change}
+                        placeholder="Description"
+                      ></textarea>
+                    </div>
                   </div>
                 </div>
                 <div className="grid-25 grid-right">
@@ -78,29 +89,31 @@ export default class CreateCourse extends Component {
                             value={estimatedTime}
                             onChange={this.change}
                             placeholder="Estimated Time"
+                            className="course--time--input"
                           />
+                        </div>
+                      </li>
+                      <li className="course--stats--list--item">
+                        <h4>Materials Needed</h4>{" "}
+                        <div>
+                          <textarea
+                            id="materialsNeeded"
+                            name="materialsNeeded"
+                            type="text"
+                            value={materialsNeeded}
+                            onChange={this.change}
+                            placeholder="Materials Needed"
+                            className="course--materials--input"
+                          ></textarea>
                         </div>
                       </li>
                     </ul>
                   </div>
                 </div>
-              </div>
-
-              <input
-                id="materialsNeeded"
-                name="materialsNeeded"
-                type="text"
-                value={materialsNeeded}
-                onChange={this.change}
-                placeholder="Materials Needed"
-              />
-            </React.Fragment>
-          )}
-        />
-        <p>
-          Already have a user account? <Link to="/signin">Click here</Link> to
-          sign in!
-        </p>
+              </React.Fragment>
+            )}
+          />
+        </div>
       </div>
     );
   }
