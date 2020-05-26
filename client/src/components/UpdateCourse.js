@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import Form from "./Form";
 
 export default class CreateCourse extends Component {
@@ -29,97 +30,106 @@ export default class CreateCourse extends Component {
   }
   render() {
     const { course, owner, errors } = this.state;
-    const { firstName, lastName } = owner;
+    const { firstName, lastName, id } = owner;
 
     console.log("This is owner variable firstname of state " + firstName);
 
     const { context } = this.props;
     const authUser = context.authenticatedUser;
 
+    console.log(authUser.id + " " + id);
+
     return (
-      <div className="bounds course--detail">
-        <h1>Update Course</h1>
-        <div>
-          <div>
-            <h2 className="validation--errors--label">Validation errors</h2>
-            <div className="validation-errors">
-              <ul>
-                <li>Please provide a value for "Title"</li>
-                <li>Please provide a value for "Description"</li>
-              </ul>
-            </div>
-          </div>
-          <Form
-            cancel={this.cancel}
-            errors={errors}
-            submit={this.submit}
-            submitButtonText="Update Course"
-            elements={() => (
-              <React.Fragment>
-                <div className="grid-66">
-                  <div className="course--header">
-                    <h4 className="course--label">Course</h4>
-                    <input
-                      id="title"
-                      name="title"
-                      type="text"
-                      ref={(input) => (this.title = input)}
-                      defaultValue={course.title}
-                      className="input-title course--title--input"
-                    />
-                    <p>
-                      By: {firstName} {lastName}
-                    </p>
-                  </div>
-                  <div className="course--description">
-                    <div>
-                      <textarea
-                        id="description"
-                        name="description"
-                        type="text"
-                        ref={(input) => (this.description = input)}
-                        defaultValue={course.description}
-                      ></textarea>
-                    </div>
-                  </div>
+      <React.Fragment>
+        {authUser.id === id ? (
+          <div className="bounds course--detail">
+            <h1>Update Course</h1>
+            <div>
+              <div>
+                <h2 className="validation--errors--label">Validation errors</h2>
+                <div className="validation-errors">
+                  <ul>
+                    <li>Please provide a value for "Title"</li>
+                    <li>Please provide a value for "Description"</li>
+                  </ul>
                 </div>
-                <div className="grid-25 grid-right">
-                  <div className="course--stats">
-                    <ul className="course--stats--list">
-                      <li className="course--stats--list--item">
-                        <h4>Estimated Time</h4>
-                        <div>
-                          <input
-                            id="estimatedTime"
-                            name="estimatedTime"
-                            type="text"
-                            ref={(input) => (this.estimatedTime = input)}
-                            defaultValue={course.estimatedTime}
-                            className="course--time--input"
-                          />
-                        </div>
-                      </li>
-                      <li className="course--stats--list--item">
-                        <h4>Materials Needed</h4>{" "}
+              </div>
+              <Form
+                cancel={this.cancel}
+                errors={errors}
+                submit={this.submit}
+                submitButtonText="Update Course"
+                elements={() => (
+                  <React.Fragment>
+                    <div className="grid-66">
+                      <div className="course--header">
+                        <h4 className="course--label">Course</h4>
+                        <input
+                          id="title"
+                          name="title"
+                          type="text"
+                          ref={(input) => (this.title = input)}
+                          defaultValue={course.title}
+                          className="input-title course--title--input"
+                        />
+                        <p>
+                          By: {firstName} {lastName}
+                        </p>
+                      </div>
+                      <div className="course--description">
                         <div>
                           <textarea
-                            id="materialsNeeded"
-                            name="materialsNeeded"
+                            id="description"
+                            name="description"
                             type="text"
-                            ref={(input) => (this.materialsNeeded = input)}
-                            defaultValue={course.materialsNeeded}
-                            className="course--materials--input"
+                            ref={(input) => (this.description = input)}
+                            defaultValue={course.description}
                           ></textarea>
                         </div>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </React.Fragment>
-            )}
-          />
-        </div>
-      </div>
+                      </div>
+                    </div>
+                    <div className="grid-25 grid-right">
+                      <div className="course--stats">
+                        <ul className="course--stats--list">
+                          <li className="course--stats--list--item">
+                            <h4>Estimated Time</h4>
+                            <div>
+                              <input
+                                id="estimatedTime"
+                                name="estimatedTime"
+                                type="text"
+                                ref={(input) => (this.estimatedTime = input)}
+                                defaultValue={course.estimatedTime}
+                                className="course--time--input"
+                              />
+                            </div>
+                          </li>
+                          <li className="course--stats--list--item">
+                            <h4>Materials Needed</h4>{" "}
+                            <div>
+                              <textarea
+                                id="materialsNeeded"
+                                name="materialsNeeded"
+                                type="text"
+                                ref={(input) => (this.materialsNeeded = input)}
+                                defaultValue={course.materialsNeeded}
+                                className="course--materials--input"
+                              ></textarea>
+                            </div>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </React.Fragment>
+                )}
+              />
+            </div>
+          </div>
+        ) : (
+          <span> You are not the owner so you can't make an update</span>
+          //<Redirect to="/" /> //***THIS WON'T WORK FOR SOME REASON
+        )}
+      </React.Fragment>
     );
   }
 
