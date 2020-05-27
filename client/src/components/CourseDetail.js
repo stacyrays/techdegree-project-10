@@ -44,7 +44,10 @@ export default class CourseDetail extends Component {
               <div className="grid-100">
                 {authUser.id === id ? (
                   <span>
-                    <Link className="button" to={`/update/${course.id}`}>
+                    <Link
+                      className="button"
+                      to={`/courses/${course.id}/update`}
+                    >
                       Update Course
                     </Link>
                     <a className="button" onClick={this.deleteCourse}>

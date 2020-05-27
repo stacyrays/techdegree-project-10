@@ -42,7 +42,7 @@ export default () => (
         />
         <PrivateRoute
           exact
-          path="/update/:id"
+          path="/courses/:id/update"
           component={UpdateCourseWithContext}
         />
         {/* <PrivateRoute path="/authenticated" component={AuthWithContext} />
