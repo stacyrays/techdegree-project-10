@@ -50,9 +50,12 @@ export default class CourseDetail extends Component {
                     >
                       Update Course
                     </Link>
-                    <a className="button" onClick={this.deleteCourse}>
+                    <Link
+                      className="button"
+                      to={`/courses/${course.id}/delete`}
+                    >
                       Delete Course
-                    </a>
+                    </Link>
                   </span>
                 ) : (
                   <span></span>
