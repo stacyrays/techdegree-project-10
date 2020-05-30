@@ -40,9 +40,6 @@ export default () => (
         <Route exact path="/signin" component={UserSignInWithContext} />
         <Route exact path="/signup" component={UserSignUpWithContext} />
         <Route path="/signout" component={UserSignOutWithContext} />
-        <Route path="/notfound" component={NotFound} />
-        <Route path="/forbidden" component={Forbidden} />
-        <Route path="/error" component={UnhandledError} />
         <PrivateRoute
           exact
           path="/create"
@@ -58,9 +55,10 @@ export default () => (
           path="/courses/:id/delete"
           component={DeleteCourseWithContext}
         />
-        {/* <PrivateRoute path="/authenticated" component={AuthWithContext} />
-        <Route path="/signout" component={UserSignOutWithContext} />
-        <Route component={NotFound} /> */}
+        <Route path="/forbidden" component={Forbidden} />
+        <Route path="/error" component={UnhandledError} />
+        <Route path="/notfound" component={NotFound} />
+        <Route component={NotFound} />
       </Switch>
     </div>
   </Router>
