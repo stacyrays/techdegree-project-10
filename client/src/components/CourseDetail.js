@@ -12,18 +12,14 @@ export default class CourseDetail extends Component {
       const { context } = this.props;
       const course = await context.data.getCourse(this.props.match.params.id);
       const owner = course.owner;
-      console.log("This is the course " + course.owner.firstName);
-      //console.log(context.data.title);
 
       if (course) {
         this.setState({ course, owner });
       } else {
-        console.log("there is an error 404");
         this.props.history.push("/notfound");
       }
     } catch (err) {
-      console.log("there is an error 404");
-      this.props.history.push("/error");
+      this.props.history.push("/notfound");
     }
   }
   render() {
@@ -31,10 +27,16 @@ export default class CourseDetail extends Component {
     const { title, description, estimatedTime, materialsNeeded } = course;
     const { firstName, lastName, id } = owner;
 
+    let authUserId = 0;
+    let authUser = {};
+
     const { context } = this.props;
-    const authUser = context.authenticatedUser;
-    console.log(authUser.id + " " + id);
-    // authUser.id === id ? console.log("yes it is") : console.log("no it isn't");
+    if (!context.authenticatedUser) {
+      authUserId = null;
+    } else {
+      authUser = context.authenticatedUser;
+      authUserId = authUser.id;
+    }
 
     return (
       <React.Fragment>

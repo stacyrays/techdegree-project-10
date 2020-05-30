@@ -8,11 +8,19 @@ export default class UserSignUp extends Component {
     lastName: "",
     emailAddress: "",
     password: "",
+    confirmPassword: "",
     errors: [],
   };
 
   render() {
-    const { firstName, lastName, emailAddress, password, errors } = this.state;
+    const {
+      firstName,
+      lastName,
+      emailAddress,
+      password,
+      confirmPassword,
+      errors,
+    } = this.state;
 
     return (
       <div className="bounds">
@@ -57,6 +65,14 @@ export default class UserSignUp extends Component {
                   onChange={this.change}
                   placeholder="Password"
                 />
+                <input
+                  id="confirmPassword"
+                  name="confirmPassword"
+                  type="password"
+                  value={confirmPassword}
+                  onChange={this.change}
+                  placeholder="Confirm Password"
+                />
               </React.Fragment>
             )}
           />
@@ -82,31 +98,41 @@ export default class UserSignUp extends Component {
 
   submit = () => {
     const { context } = this.props;
-    const { firstName, lastName, emailAddress, password } = this.state;
-
-    // Create user
-    const user = {
+    const {
       firstName,
       lastName,
       emailAddress,
       password,
-    };
+      confirmPassword,
+    } = this.state;
 
-    context.data
-      .createUser(user)
-      .then((errors) => {
-        if (errors.length) {
-          this.setState({ errors });
-        } else {
-          context.actions.signIn(emailAddress, password).then(() => {
-            this.props.history.push("/authenticated");
-          });
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-        this.props.history.push("/error");
-      });
+    if (password === confirmPassword) {
+      // Create user
+      const user = {
+        firstName,
+        lastName,
+        emailAddress,
+        password,
+      };
+
+      context.data
+        .createUser(user)
+        .then((errors) => {
+          if (errors.length) {
+            this.setState({ errors });
+          } else {
+            context.actions.signIn(emailAddress, password).then(() => {
+              this.props.history.push("/authenticated");
+            });
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+          this.props.history.push("/error");
+        });
+    } else {
+      console.log("do not match try again");
+    }
   };
 
   cancel = () => {
