@@ -261,7 +261,8 @@ body {
   margin-top: -30px;
 }
 /* line 2, ../sass/mixins.sass */
-.actions--bar:before, .actions--bar:after {
+.actions--bar:before,
+.actions--bar:after {
   content: " ";
   display: table;
 }
@@ -302,10 +303,15 @@ p {
 .bounds {
   max-width: 1250px;
   margin: 0 auto;
+  margin: 0 20px 0 20px;
 }
 
 /* line 74, ../sass/global.sass */
-.grid, .grid-25, .grid-33, .grid-66, .grid-100 {
+.grid,
+.grid-25,
+.grid-33,
+.grid-66,
+.grid-100 {
   float: left;
   padding: 0 15px;
   box-sizing: border-box;
@@ -349,7 +355,8 @@ p {
   box-sizing: border-box;
 }
 /* line 2, ../sass/mixins.sass */
-.course--module:before, .course--module:after {
+.course--module:before,
+.course--module:after {
   content: " ";
   display: table;
 }
@@ -478,7 +485,8 @@ p {
   font-family: "Cousine";
 }
 /* line 2, ../sass/mixins.sass */
-.course--description li:before, .course--description li:after {
+.course--description li:before,
+.course--description li:after {
   content: " ";
   display: table;
 }
