@@ -208,9 +208,17 @@ router.post(
   "/courses",
   authenticateUser,
   [
-    check("title").exists().withMessage('Please provide a value for "title"'),
+    // check("title").exists().withMessage('Please provide a value for "title"'),
+    // check("description")
+    //   .exists()
+    //   .withMessage('Please provide a value for "description"'),
+    check("title")
+      .exists()
+      .isLength({ min: 1 })
+      .withMessage('Please provide a value for "title"'),
     check("description")
       .exists()
+      .isLength({ min: 1 })
       .withMessage('Please provide a value for "description"'),
   ],
   asyncHandler(async (req, res) => {

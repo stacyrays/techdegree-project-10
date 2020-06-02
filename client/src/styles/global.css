@@ -757,6 +757,13 @@ input:focus {
   display: none;
 }
 
+.provide-title {
+  display: none;
+}
+.provide-desc {
+  display: none;
+}
+
 /* reduce bottom margin on the course description textarea element */
 .course--description textarea {
   margin-bottom: 20px;
