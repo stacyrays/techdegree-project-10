@@ -47,8 +47,8 @@ export default class CreateCourse extends Component {
             <h2 className="validation--errors--label">Validation errors</h2>
             <div className="validation-errors">
               <ul>
-                <li>Please provide a value for "Title"</li>
-                <li>Please provide a value for "Description"</li>
+                <li className="provide-title"></li>
+                <li className="provide-desc"></li>
               </ul>
             </div>
           </div>
@@ -147,12 +147,40 @@ export default class CreateCourse extends Component {
     const { from } = this.props.location.state || {
       from: { pathname: "/" },
     };
+    const errorHeader = document.getElementsByClassName(
+      "validation--errors--label"
+    )[0];
+    const errors = document.getElementsByClassName("validation-errors")[0];
+    const errorList = errors.getElementsByTagName("UL")[0];
+    const errorTitle = document.getElementsByClassName("provide-title")[0];
+    const errorDesc = document.getElementsByClassName("provide-desc")[0];
 
     context.data
       .updateCourse(course, emailAddress, password)
       .then((response) => {
         if (response !== null) {
           this.setState({ errors: response });
+          console.log("These are the errors " + this.state.errors);
+          if (!title.length) {
+            errorHeader.setAttribute("style", "display:block");
+            errorList.setAttribute("style", "display:block");
+            errorTitle.innerHTML = this.state.errors[0];
+            errorTitle.setAttribute("style", "display:block");
+          } else if (title.length > 0) {
+            errorHeader.setAttribute("style", "display:none");
+            errorList.setAttribute("style", "display:none");
+            errorTitle.setAttribute("style", "display:none");
+          }
+          if (!description.length) {
+            errorHeader.setAttribute("style", "display:block");
+            errorList.setAttribute("style", "display:block");
+            errorDesc.innerHTML = this.state.errors[1];
+            errorDesc.setAttribute("style", "display:block");
+          } else if (description.length > 0) {
+            errorHeader.setAttribute("style", "display:none");
+            errorList.setAttribute("style", "display:none");
+            errorDesc.setAttribute("style", "display:none");
+          }
         } else {
           console.log(`The course ${title} is created`);
           this.props.history.push(`/courses/${this.state.course.id}`);
