@@ -223,6 +223,7 @@ router.post(
       const errorMessages = errors.array().map((error) => error.msg);
 
       // Return the validation errors to the client.
+      console.log("there was an error");
       return res.status(400).json({ errors: errorMessages });
     } else {
       const courseData = req.body;

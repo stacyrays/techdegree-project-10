@@ -93,7 +93,7 @@ export default class Data {
       emailAddress,
       password,
     });
-    //console.log("create course is triggered");
+    console.log(response.status);
     if (response.status === 201) {
       return null;
     } else if (response.status === 400) {
@@ -102,7 +102,7 @@ export default class Data {
         return data.errors;
       });
     } else {
-      throw new Error("Error not specified");
+      throw new Error("POST Course error not specified");
     }
   }
 
