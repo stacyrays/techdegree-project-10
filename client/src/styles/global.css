@@ -99,6 +99,7 @@ xmp {
 html,
 body {
   height: 100%;
+  background: #efefef;
 }
 
 /* line 106, ../sass/reset.sass */
@@ -202,12 +203,11 @@ svg {
 /* line 5, ../sass/global.sass */
 body {
   font-family: "Work Sans", sans-serif;
-  background: #fff;
 }
 
 /* line 13, ../sass/global.sass */
 .header {
-  background: #57496e;
+  background: cornflowerblue;
   padding: 20px 0;
   margin-bottom: 30px;
 }
@@ -255,8 +255,7 @@ body {
 
 /* line 44, ../sass/global.sass */
 .actions--bar {
-  border-bottom: 1px solid #d5f9fe;
-  background: #f8feff;
+  background: #e2e2e2;
   padding: 20px 0;
   margin-top: -30px;
 }
@@ -278,12 +277,12 @@ body {
 /* line 57, ../sass/global.sass */
 h1 {
   font-size: 36px;
-  margin-bottom: 20px;
+  margin: 20px 15px;
 }
 
 /* line 61, ../sass/global.sass */
 a {
-  color: #7c689b;
+  color: cornflowerblue;
   cursor: pointer;
   text-decoration: none;
   -webkit-transition: color 0.2s;
@@ -345,7 +344,7 @@ p {
 
 /* line 102, ../sass/global.sass */
 .course--module {
-  background: #7c689b;
+  background: #ffffff;
   border-radius: 8px;
   padding: 30px;
   margin-bottom: 30px;
@@ -353,6 +352,17 @@ p {
   display: block;
   position: relative;
   box-sizing: border-box;
+  -webkit-box-shadow: 2px 2px 58px -44px rgba(0, 0, 0, 0.4);
+  -moz-box-shadow: 2px 2px 58px -44px rgba(0, 0, 0, 0.4);
+  box-shadow: 2px 2px 58px -44px rgba(0, 0, 0, 0.4);
+  -webkit-transition: -webkit-box-shadow 0.2s;
+  -moz-transition: -moz-box-shadow 0.2s;
+  transition: box-shadow 0.3s;
+}
+.course--module:hover {
+  -webkit-box-shadow: -20px 2px 76px -24px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: -20px 2px 76px -24px rgba(0, 0, 0, 0.5);
+  box-shadow: -20px 2px 76px -24px rgba(0, 0, 0, 0.5);
 }
 /* line 2, ../sass/mixins.sass */
 .course--module:before,
@@ -375,14 +385,14 @@ p {
   font-family: "Cousine";
   font-size: 14px;
   font-weight: 100;
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba(0, 0, 0, 0.5);
   margin-bottom: 10px;
   font-weight: normal;
 }
 /* line 123, ../sass/global.sass */
 .course--title {
   font-size: 18px;
-  color: #fff;
+  color: cornflowerblue;
 }
 /* line 126, ../sass/global.sass */
 .course--link {
@@ -393,7 +403,7 @@ p {
 }
 /* line 133, ../sass/global.sass */
 .course--add--module {
-  background: #eee;
+  background: #e2e2e2;
   text-align: center;
 }
 /* line 137, ../sass/global.sass */
@@ -446,7 +456,7 @@ p {
 /* line 171, ../sass/global.sass */
 .course--header p {
   font-size: 18px;
-  color: #b1a5c4;
+  color: #999;
   font-weight: 100;
 }
 /* line 176, ../sass/global.sass */
@@ -602,7 +612,7 @@ textarea {
   padding: 15px;
   font-size: 16px;
   margin: 0 0 20px;
-  border: 1px solid #ccc4d8;
+  border: none;
   color: #666;
   line-height: 1.8;
   outline: none;
@@ -638,8 +648,8 @@ textarea:focus {
 input {
   width: 100%;
   color: #332a40;
+  border: none;
   border-radius: 8px;
-  border: 1px solid #ccc4d8;
   padding: 15px;
   margin-bottom: 15px;
   outline: none;
@@ -686,10 +696,10 @@ input:focus {
 
 /* line 507, ../sass/global.sass */
 .button {
-  background: #7c689b;
-  color: #fff;
+  background: #efefef;
+  color: cornflowerblue;
   font-family: "Work Sans", sans-serif;
-  font-size: 18px;
+  font-size: 16px;
   padding: 15px 30px;
   border: 0;
   margin-right: 10px;
@@ -702,6 +712,12 @@ input:focus {
   -ms-transition: background 0.2s;
   -o-transition: background 0.2s;
   transition: background 0.2s;
+  cursor: pointer;
+}
+
+form .button {
+  background: cornflowerblue;
+  color: #fff;
 }
 /* line 520, ../sass/global.sass */
 .button:focus {
@@ -709,24 +725,30 @@ input:focus {
 }
 /* line 522, ../sass/global.sass */
 .button:not(.button-secondary):hover {
-  background: #63537d;
+  background: #fff;
+  color: cornflowerblue;
 }
 
 /* line 525, ../sass/global.sass */
 .button-secondary {
-  color: #7c689b;
+  color: cornflowerblue;
   background: none;
-  box-shadow: 0 0 0 2px #7c689b inset;
+  box-shadow: 0 0 0 2px cornflowerblue inset;
   -webkit-transition: box-shadow 0.2s, color 0.2s;
   -moz-transition: box-shadow 0.2s, color 0.2s;
   -ms-transition: box-shadow 0.2s, color 0.2s;
   -o-transition: box-shadow 0.2s, color 0.2s;
   transition: box-shadow 0.2s, color 0.2s;
 }
+form .button-secondary {
+  background: none;
+  color: cornflowerblue;
+  box-shadow: 0 0 0 2px cornflowerblue inset;
+}
 /* line 530, ../sass/global.sass */
 .button-secondary:hover {
-  color: #63537d;
-  box-shadow: 0 0 0 2px #63537d inset;
+  color: cornflowerblue;
+  box-shadow: 0 0 0 2px #fff inset;
 }
 
 /* adds additional padding to the bottom of an element */

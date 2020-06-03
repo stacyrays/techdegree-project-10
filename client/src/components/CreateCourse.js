@@ -59,7 +59,7 @@ export default class CreateCourse extends Component {
                       className="input-title course--title--input"
                     />
                     <p>
-                      By: {authUser.firstName} {authUser.lastName}
+                      Author: {authUser.firstName} {authUser.lastName}
                     </p>
                   </div>
                   <div className="course--description">
