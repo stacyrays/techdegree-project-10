@@ -294,7 +294,6 @@ a {
 
 /* line 66, ../sass/global.sass */
 p {
-  font-family: "Cousine";
   margin-bottom: 30px;
 }
 
@@ -383,7 +382,6 @@ p {
 }
 /* line 116, ../sass/global.sass */
 .course--label {
-  font-family: "Cousine";
   font-size: 14px;
   font-weight: 100;
   color: rgba(0, 0, 0, 0.5);
@@ -458,7 +456,7 @@ p {
 /* line 171, ../sass/global.sass */
 .course--header p {
   font-size: 18px;
-  color: #999;
+  color: #aaa;
   font-weight: 100;
 }
 /* line 176, ../sass/global.sass */
@@ -494,7 +492,6 @@ p {
   border-top: 1px solid #ccc;
   font-size: 16px;
   line-height: 1.8;
-  font-family: "Cousine";
 }
 /* line 2, ../sass/mixins.sass */
 .course--description li:before,
@@ -560,18 +557,16 @@ p {
 }
 /* line 287, ../sass/global.sass */
 .course--stats--list h4 {
-  font-family: "Cousine";
   font-weight: 100;
   color: #999;
   font-size: 14px;
   padding: 0 0 10px;
   margin-bottom: 10px;
   border-bottom: 1px solid #ddd;
-  text-transform: uppercase;
-  letter-spacing: 2px;
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
+  text-transform: uppercase;
 }
 /* line 300, ../sass/global.sass */
 .course--stats--list h3 {
@@ -629,7 +624,6 @@ textarea {
   color: #666;
   line-height: 1.8;
   outline: none;
-  font-family: "Cousine";
   box-sizing: border-box;
 }
 /* line 29, ../sass/mixins.sass */
