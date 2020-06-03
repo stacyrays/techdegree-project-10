@@ -348,7 +348,7 @@ p {
   border-radius: 8px;
   padding: 30px;
   margin-bottom: 30px;
-  min-height: 107px;
+  max-height: 107px;
   display: block;
   position: relative;
   box-sizing: border-box;
@@ -358,6 +358,7 @@ p {
   -webkit-transition: -webkit-box-shadow 0.2s;
   -moz-transition: -moz-box-shadow 0.2s;
   transition: box-shadow 0.3s;
+  overflow: hidden;
 }
 .course--module:hover {
   -webkit-box-shadow: -20px 2px 76px -24px rgba(0, 0, 0, 0.5);
@@ -405,6 +406,7 @@ p {
 .course--add--module {
   background: #e2e2e2;
   text-align: center;
+  min-height: 107px;
 }
 /* line 137, ../sass/global.sass */
 .course--add--module:hover .course--add--title {
