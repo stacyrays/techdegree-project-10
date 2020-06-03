@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import { Redirect } from "react-router-dom";
+
 import Form from "./Form";
 
 export default class CreateCourse extends Component {
@@ -29,8 +28,8 @@ export default class CreateCourse extends Component {
     }
   }
   render() {
-    const { course, owner, errors } = this.state;
-    const { firstName, lastName, id } = owner;
+    const { owner, errors } = this.state;
+    const { firstName, id } = owner;
 
     console.log("This is owner variable firstname of state " + firstName);
 
@@ -43,7 +42,8 @@ export default class CreateCourse extends Component {
       <React.Fragment>
         {authUser.id === id ? (
           <div className="bounds course--detail">
-            <h1>Update Course</h1>
+            <h1>Delete Course</h1>
+            <p>Are you sure you want to delete?</p>
             <div>
               <div>
                 <h2 className="validation--errors--label">Validation errors</h2>
@@ -61,7 +61,7 @@ export default class CreateCourse extends Component {
                 submitButtonText="Delete Course"
                 elements={() => (
                   <React.Fragment>
-                    <div className="grid-66">
+                    {/* <div className="grid-66">
                       <div className="course--header">
                         <h4 className="course--label">Course</h4>
                         <input
@@ -119,7 +119,7 @@ export default class CreateCourse extends Component {
                           </li>
                         </ul>
                       </div>
-                    </div>
+                    </div> */}
                   </React.Fragment>
                 )}
               />
@@ -144,15 +144,11 @@ export default class CreateCourse extends Component {
 
     // Updatecourse
     const course = {
-      title: title.value,
-      description: description.value,
-      estimatedTime: estimatedTime.value,
-      materialsNeeded: materialsNeeded.value,
+      title,
+      description,
+      estimatedTime,
+      materialsNeeded,
       id: this.state.course.id,
-    };
-
-    const { from } = this.props.location.state || {
-      from: { pathname: "/" },
     };
 
     context.data
@@ -161,7 +157,6 @@ export default class CreateCourse extends Component {
         if (response !== null) {
           this.setState({ errors: response });
         } else {
-          console.log(`The course ${title} is created`);
           this.props.history.push(`/`);
         }
       })
@@ -172,6 +167,6 @@ export default class CreateCourse extends Component {
   };
 
   cancel = () => {
-    this.props.history.push("/");
+    this.props.history.push(`/courses/${this.state.course.id}`);
   };
 }

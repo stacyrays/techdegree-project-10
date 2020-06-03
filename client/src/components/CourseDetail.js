@@ -24,7 +24,7 @@ export default class CourseDetail extends Component {
     }
   }
   render() {
-    const { course, owner, errors } = this.state;
+    const { course, owner } = this.state;
     const { title, description, estimatedTime, materialsNeeded } = course;
     const { firstName, lastName, id } = owner;
 

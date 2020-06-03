@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import { Redirect } from "react-router-dom";
 import Form from "./Form";
 
 export default class CreateCourse extends Component {
@@ -144,9 +142,6 @@ export default class CreateCourse extends Component {
       id: this.state.course.id,
     };
 
-    const { from } = this.props.location.state || {
-      from: { pathname: "/" },
-    };
     const errorHeader = document.getElementsByClassName(
       "validation--errors--label"
     )[0];
@@ -193,6 +188,6 @@ export default class CreateCourse extends Component {
   };
 
   cancel = () => {
-    this.props.history.push("/");
+    this.props.history.push(`/courses/${this.state.course.id}`);
   };
 }
