@@ -605,6 +605,17 @@ p {
   margin-top: 60px;
 }
 
+.signin h1,
+.signup h1 {
+  margin-left: 0;
+}
+
+.signin .pad-bottom,
+.signup .pad-bottom {
+  margin-left: 0;
+  padding-left: 0;
+}
+
 /* line 468, ../sass/global.sass */
 textarea {
   width: 100%;
