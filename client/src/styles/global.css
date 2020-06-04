@@ -802,6 +802,22 @@ form .button-secondary {
   display: none;
 }
 
+.firstNameDOM {
+  display: none;
+}
+
+.lastNameDOM {
+  display: none;
+}
+
+.emailAddressDOM {
+  display: none;
+}
+
+.passwordDOM {
+  display: none;
+}
+
 /* reduce bottom margin on the course description textarea element */
 .course--description textarea {
   margin-bottom: 20px;
