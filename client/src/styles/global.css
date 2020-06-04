@@ -345,6 +345,11 @@ p {
   margin: 0 auto;
 }
 
+.course--detail h1,
+.course--detail p {
+  margin-left: 20px;
+}
+
 /* line 102, ../sass/global.sass */
 .course--module {
   background: #ffffff;
