@@ -304,6 +304,10 @@ p {
   margin: 0 20px 0 20px;
 }
 
+.bounds h1 {
+  margin-left: 0;
+}
+
 /* line 74, ../sass/global.sass */
 .grid,
 .grid-25,

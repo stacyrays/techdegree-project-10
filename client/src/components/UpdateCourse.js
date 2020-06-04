@@ -18,25 +18,13 @@ export default class UpdateCourse extends Component {
       if (owner.id === authUser.id && course) {
         this.setState({ course, owner });
       } else {
-        console.log("there is an error 404");
         this.props.history.push("/forbidden");
       }
     } catch (err) {
       console.log("there is an error 404");
-      this.props.history.push("/error");
+      this.props.history.push("/notfound");
     }
   }
-
-  //   if (course) {
-  //     this.setState({ course, owner });
-  //   } else {
-  //     console.log("there is an error 404");
-  //     this.props.history.push("/notfound");
-  //   }
-  // } catch (err) {
-  //   console.log("there is an error 404");
-  //   this.props.history.push("/error");
-  // }
 
   render() {
     const { course, owner, errors } = this.state;
