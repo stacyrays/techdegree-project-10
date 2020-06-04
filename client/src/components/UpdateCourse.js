@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Link, Redirect } from "react-router-dom";
 import Form from "./Form";
 
 export default class UpdateCourse extends Component {
@@ -29,10 +28,10 @@ export default class UpdateCourse extends Component {
 
   render() {
     const { course, owner, errors } = this.state;
-    const { firstName, lastName, id } = owner;
+    const { firstName, lastName } = owner;
 
-    const { context } = this.props;
-    const authUser = context.authenticatedUser;
+    //const { context } = this.props;
+    // const authUser = context.authenticatedUser;
 
     return (
       <div className="bounds course--detail">

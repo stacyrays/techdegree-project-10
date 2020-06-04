@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import Form from "./Form";
 
 export default class UserSignUp extends Component {
@@ -116,34 +115,43 @@ export default class UserSignUp extends Component {
       confirmPassword,
     } = this.state;
 
-    if (password === confirmPassword) {
-      // Create user
-      const user = {
-        firstName,
-        lastName,
-        emailAddress,
-        password,
-      };
-
-      context.data
-        .createUser(user)
-        .then((errors) => {
-          if (errors.length) {
-            this.setState({ errors });
-          } else {
-            context.actions.signIn(emailAddress, password).then(() => {
-              this.props.history.push("/authenticated");
-            });
-          }
-        })
-        .catch((err) => {
-          //catch all error
-          this.props.history.push("/error");
-        });
+    if (
+      firstName === "" ||
+      lastName === "" ||
+      emailAddress === "" ||
+      password === ""
+    ) {
+      this.props.history.push("/error");
     } else {
-      const passwordMatch = document.getElementById("passwordMatch");
-      passwordMatch.setAttribute("style", "display:block");
-      console.log("do not match try again");
+      if (password === confirmPassword) {
+        // Create user
+        const user = {
+          firstName,
+          lastName,
+          emailAddress,
+          password,
+        };
+
+        context.data
+          .createUser(user)
+          .then((errors) => {
+            if (errors.length) {
+              this.setState({ errors });
+            } else {
+              context.actions.signIn(emailAddress, password).then(() => {
+                this.props.history.push("/authenticated");
+              });
+            }
+          })
+          .catch((err) => {
+            //catch all error
+            this.props.history.push("/error");
+          });
+      } else {
+        const passwordMatch = document.getElementById("passwordMatch");
+        passwordMatch.setAttribute("style", "display:block");
+        console.log("do not match try again");
+      }
     }
   };
 

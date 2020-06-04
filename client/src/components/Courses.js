@@ -36,7 +36,10 @@ export default class Courses extends Component {
       <div className="bounds">
         {courses}
         <div className="grid-33">
-          <a className="course--module course--add--module" href="/create">
+          <a
+            className="course--module course--add--module"
+            href="/courses/create"
+          >
             <h3 className="course--add--title">
               {/* Add new button at the end of the course buttons */}
               <svg
