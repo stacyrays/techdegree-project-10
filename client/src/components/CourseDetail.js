@@ -8,6 +8,7 @@ export default class CourseDetail extends Component {
     owner: {},
     errors: [],
   };
+  //After component mounts, gather context data to populate the correct course
   async componentDidMount() {
     try {
       const { context } = this.props;
@@ -15,11 +16,14 @@ export default class CourseDetail extends Component {
       const owner = course.owner;
 
       if (course) {
+        //Populate correct course and owner in state
         this.setState({ course, owner });
       } else {
+        //Go to not found if no course
         this.props.history.push("/notfound");
       }
     } catch (err) {
+      //Catch all error
       this.props.history.push("/notfound");
     }
   }
@@ -28,16 +32,8 @@ export default class CourseDetail extends Component {
     const { title, description, estimatedTime, materialsNeeded } = course;
     const { firstName, lastName, id } = owner;
 
-    let authUserId = 0;
-    let authUser = {};
-
     const { context } = this.props;
-    if (!context.authenticatedUser) {
-      authUserId = null;
-    } else {
-      authUser = context.authenticatedUser;
-      authUserId = authUser.id;
-    }
+    const authUser = context.authenticatedUser;
 
     return (
       <React.Fragment>
@@ -45,6 +41,7 @@ export default class CourseDetail extends Component {
           <div className="actions--bar">
             <div className="bounds">
               <div className="grid-100">
+                {/*Check to see if Auth id matches owner id, if it does display update and delete buttons, if not, don't show those buttons*/}
                 {authUser.id === id ? (
                   <span>
                     <Link

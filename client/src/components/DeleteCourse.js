@@ -40,88 +40,18 @@ export default class CreateCourse extends Component {
 
     return (
       <React.Fragment>
+        {/*If Auth user id matches ownder id then display the delete button */}
         {authUser.id === id ? (
           <div className="bounds course--detail">
             <h1>Delete Course</h1>
             <p>Are you sure you want to delete?</p>
             <div>
-              <div>
-                <h2 className="validation--errors--label">Validation errors</h2>
-                <div className="validation-errors">
-                  <ul>
-                    <li>Please provide a value for "Title"</li>
-                    <li>Please provide a value for "Description"</li>
-                  </ul>
-                </div>
-              </div>
               <Form
                 cancel={this.cancel}
                 errors={errors}
                 submit={this.submit}
                 submitButtonText="Delete Course"
-                elements={() => (
-                  <React.Fragment>
-                    {/* <div className="grid-66">
-                      <div className="course--header">
-                        <h4 className="course--label">Course</h4>
-                        <input
-                          id="title"
-                          name="title"
-                          type="text"
-                          ref={(input) => (this.title = input)}
-                          defaultValue={course.title}
-                          className="input-title course--title--input"
-                        />
-                        <p>
-                          By: {firstName} {lastName}
-                        </p>
-                      </div>
-                      <div className="course--description">
-                        <div>
-                          <textarea
-                            id="description"
-                            name="description"
-                            type="text"
-                            ref={(input) => (this.description = input)}
-                            defaultValue={course.description}
-                          ></textarea>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="grid-25 grid-right">
-                      <div className="course--stats">
-                        <ul className="course--stats--list">
-                          <li className="course--stats--list--item">
-                            <h4>Estimated Time</h4>
-                            <div>
-                              <input
-                                id="estimatedTime"
-                                name="estimatedTime"
-                                type="text"
-                                ref={(input) => (this.estimatedTime = input)}
-                                defaultValue={course.estimatedTime}
-                                className="course--time--input"
-                              />
-                            </div>
-                          </li>
-                          <li className="course--stats--list--item">
-                            <h4>Materials Needed</h4>{" "}
-                            <div>
-                              <textarea
-                                id="materialsNeeded"
-                                name="materialsNeeded"
-                                type="text"
-                                ref={(input) => (this.materialsNeeded = input)}
-                                defaultValue={course.materialsNeeded}
-                                className="course--materials--input"
-                              ></textarea>
-                            </div>
-                          </li>
-                        </ul>
-                      </div>
-                    </div> */}
-                  </React.Fragment>
-                )}
+                elements={() => <React.Fragment></React.Fragment>}
               />
             </div>
           </div>
@@ -134,15 +64,13 @@ export default class CreateCourse extends Component {
   }
 
   submit = () => {
-    //evt.preventDefault();
     const { context } = this.props;
     const authUser = context.authenticatedUser;
     const { emailAddress, password } = authUser;
-    //const { errors } = this.state;
 
     const { title, description, estimatedTime, materialsNeeded } = this;
 
-    // Updatecourse
+    // Course gets state data
     const course = {
       title,
       description,
@@ -155,13 +83,15 @@ export default class CreateCourse extends Component {
       .deleteCourse(course, emailAddress, password)
       .then((response) => {
         if (response !== null) {
+          //If response has something in it, push the error into state
           this.setState({ errors: response });
         } else {
+          //Go to courses main page
           this.props.history.push(`/`);
         }
       })
       .catch((err) => {
-        console.log(err);
+        //Error catch all
         this.props.history.push("/error");
       });
   };

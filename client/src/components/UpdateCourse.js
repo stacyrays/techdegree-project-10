@@ -14,14 +14,15 @@ export default class UpdateCourse extends Component {
       const authUser = context.authenticatedUser;
       const course = await context.data.getCourse(this.props.match.params.id);
       const owner = course.owner;
-      console.log("This is the course " + owner.firstName);
+      //if owner and auth are the same and there's a course that mathces
       if (owner.id === authUser.id && course) {
         this.setState({ course, owner });
       } else {
+        //if not
         this.props.history.push("/forbidden");
       }
     } catch (err) {
-      console.log("there is an error 404");
+      //if some other error
       this.props.history.push("/notfound");
     }
   }
@@ -30,113 +31,105 @@ export default class UpdateCourse extends Component {
     const { course, owner, errors } = this.state;
     const { firstName, lastName, id } = owner;
 
-    console.log("This is owner variable firstname of state " + firstName);
-
     const { context } = this.props;
     const authUser = context.authenticatedUser;
 
-    console.log(authUser.id + " " + id);
-    if (authUser.id === id) {
-      return (
-        <div className="bounds course--detail">
-          <h1>Update Course</h1>
+    return (
+      <div className="bounds course--detail">
+        <h1>Update Course</h1>
+        <div>
           <div>
-            <div>
-              <h2 className="validation--errors--label">Validation errors</h2>
-              <div className="validation-errors">
-                <ul>
-                  <li className="provide-title"></li>
-                  <li className="provide-desc"></li>
-                </ul>
-              </div>
+            <h2 className="validation--errors--label">Validation errors</h2>
+            <div className="validation-errors">
+              <ul>
+                <li className="provide-title"></li>
+                <li className="provide-desc"></li>
+              </ul>
             </div>
-            <Form
-              cancel={this.cancel}
-              errors={errors}
-              submit={this.submit}
-              submitButtonText="Update Course"
-              elements={() => (
-                <React.Fragment>
-                  <div className="grid-66">
-                    <div className="course--header">
-                      <h4 className="course--label">Course</h4>
-                      <input
-                        id="title"
-                        name="title"
-                        type="text"
-                        ref={(input) => (this.title = input)}
-                        defaultValue={course.title}
-                        className="input-title course--title--input"
-                      />
-                      <p>
-                        Author: {firstName} {lastName}
-                      </p>
-                    </div>
-                    <div className="course--description">
-                      <div>
-                        <textarea
-                          id="description"
-                          name="description"
-                          type="text"
-                          ref={(input) => (this.description = input)}
-                          defaultValue={course.description}
-                        ></textarea>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="grid-25 grid-right">
-                    <div className="course--stats">
-                      <ul className="course--stats--list">
-                        <li className="course--stats--list--item">
-                          <h4>Estimated Time</h4>
-                          <div>
-                            <input
-                              id="estimatedTime"
-                              name="estimatedTime"
-                              type="text"
-                              ref={(input) => (this.estimatedTime = input)}
-                              defaultValue={course.estimatedTime}
-                              className="course--time--input"
-                            />
-                          </div>
-                        </li>
-                        <li className="course--stats--list--item">
-                          <h4>Materials Needed</h4>{" "}
-                          <div>
-                            <textarea
-                              id="materialsNeeded"
-                              name="materialsNeeded"
-                              type="text"
-                              ref={(input) => (this.materialsNeeded = input)}
-                              defaultValue={course.materialsNeeded}
-                              className="course--materials--input"
-                            ></textarea>
-                          </div>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </React.Fragment>
-              )}
-            />
           </div>
+          <Form
+            cancel={this.cancel}
+            errors={errors}
+            submit={this.submit}
+            submitButtonText="Update Course"
+            elements={() => (
+              <React.Fragment>
+                <div className="grid-66">
+                  <div className="course--header">
+                    <h4 className="course--label">Course</h4>
+                    <input
+                      id="title"
+                      name="title"
+                      type="text"
+                      ref={(input) => (this.title = input)}
+                      defaultValue={course.title}
+                      className="input-title course--title--input"
+                    />
+                    <p>
+                      Author: {firstName} {lastName}
+                    </p>
+                  </div>
+                  <div className="course--description">
+                    <div>
+                      <textarea
+                        id="description"
+                        name="description"
+                        type="text"
+                        ref={(input) => (this.description = input)}
+                        defaultValue={course.description}
+                      ></textarea>
+                    </div>
+                  </div>
+                </div>
+                <div className="grid-25 grid-right">
+                  <div className="course--stats">
+                    <ul className="course--stats--list">
+                      <li className="course--stats--list--item">
+                        <h4>Estimated Time</h4>
+                        <div>
+                          <input
+                            id="estimatedTime"
+                            name="estimatedTime"
+                            type="text"
+                            ref={(input) => (this.estimatedTime = input)}
+                            defaultValue={course.estimatedTime}
+                            className="course--time--input"
+                          />
+                        </div>
+                      </li>
+                      <li className="course--stats--list--item">
+                        <h4>Materials Needed</h4>{" "}
+                        <div>
+                          <textarea
+                            id="materialsNeeded"
+                            name="materialsNeeded"
+                            type="text"
+                            ref={(input) => (this.materialsNeeded = input)}
+                            defaultValue={course.materialsNeeded}
+                            className="course--materials--input"
+                          ></textarea>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </React.Fragment>
+            )}
+          />
         </div>
-      );
-    } else {
-      return null;
-    }
+      </div>
+    );
   }
 
   submit = () => {
-    //evt.preventDefault();
     const { context } = this.props;
     const authUser = context.authenticatedUser;
     const { emailAddress, password } = authUser;
-    //const { errors } = this.state;
 
+    //Get the current state data
     const { title, description, estimatedTime, materialsNeeded } = this;
 
-    // Updatecourse
+    // Create a local course variable equal to state data
     const course = {
       title: title.value,
       description: description.value,
@@ -145,6 +138,7 @@ export default class UpdateCourse extends Component {
       id: this.state.course.id,
     };
 
+    //Create variables for HTML elements that display errors
     const errorHeader = document.getElementsByClassName(
       "validation--errors--label"
     )[0];
@@ -158,7 +152,7 @@ export default class UpdateCourse extends Component {
       .then((response) => {
         if (response !== null) {
           this.setState({ errors: response });
-          console.log("These are the errors " + this.state.errors);
+          //Update HTML error elements with new style attributes based on if there's a title and description or not
           if (!title.length) {
             errorHeader.setAttribute("style", "display:block");
             errorList.setAttribute("style", "display:block");
@@ -180,7 +174,7 @@ export default class UpdateCourse extends Component {
             errorDesc.setAttribute("style", "display:none");
           }
         } else {
-          console.log(`The course ${title} is created`);
+          //Course updates and directs to its path after done
           this.props.history.push(`/courses/${this.state.course.id}`);
         }
       })

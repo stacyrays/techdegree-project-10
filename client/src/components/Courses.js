@@ -5,18 +5,20 @@ export default class Courses extends Component {
   state = {
     courses: [],
   };
+  //After component mounts, populate state with context courses using getCourses defined in Data
   componentDidMount() {
     const { context } = this.props;
-    console.log(context);
+
     context.data
       .getCourses()
       .then((res) => this.setState({ courses: res }))
       .catch((err) => {
-        console.log(err);
+        //Catch for any error
         this.props.history.push("/error");
       });
   }
   render() {
+    //Map over courses and populate the div with each course button
     const courses = this.state.courses.map((course) => {
       return (
         <div key={course.id} className="grid-33">
@@ -36,6 +38,7 @@ export default class Courses extends Component {
         <div className="grid-33">
           <a className="course--module course--add--module" href="/create">
             <h3 className="course--add--title">
+              {/* Add new button at the end of the course buttons */}
               <svg
                 version="1.1"
                 xmlns="http://www.w3.org/2000/svg"

@@ -3,6 +3,7 @@ import React from "react";
 export default ({ context }) => {
   const authUser = context.authenticatedUser;
   return (
+    //Add firstname and email to header bar
     <div className="bounds">
       <div className="grid-100">
         <h1>{authUser.firstName} you're authenticated!</h1>

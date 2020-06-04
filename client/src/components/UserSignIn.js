@@ -14,8 +14,7 @@ export default class UserSignIn extends Component {
 
     const { context } = this.props;
     const authUser = context.authenicateUser;
-    console.log("the authUser is " + authUser);
-
+    //If there is not an auth user display the page and form
     if (!authUser) {
       return (
         <div className="bounds">
@@ -55,6 +54,7 @@ export default class UserSignIn extends Component {
         </div>
       );
     } else {
+      //If there is already an auth user, then redirect to courses main page
       return <Redirect to={"/"} />;
     }
   }
@@ -73,7 +73,6 @@ export default class UserSignIn extends Component {
   submit = () => {
     //* sign-in this.props.context to "context"
     const { context } = this.props;
-
     const { from } = this.props.location.state || {
       from: { pathname: "/" },
     };
@@ -84,16 +83,17 @@ export default class UserSignIn extends Component {
       .then((user) => {
         if (user === null) {
           this.props.history.push("/signin");
+          //Add the error to state
           this.setState(() => {
             return { errors: ["Sign-in was unsuccessful"] };
           });
         } else {
-          console.log("it worked!");
+          //Go back to previous page after successful sign in
           this.props.history.push(from);
         }
       })
       .catch((error) => {
-        console.error(error);
+        //Catch all error
         this.props.history.push("/error");
       });
   };

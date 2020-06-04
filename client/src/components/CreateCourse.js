@@ -11,6 +11,7 @@ export default class CreateCourse extends Component {
   };
 
   render() {
+    //Set the necessary variables to collect corresponding form fields and give them to state
     const {
       title,
       description,
@@ -21,10 +22,6 @@ export default class CreateCourse extends Component {
 
     const { context } = this.props;
     const authUser = context.authenticatedUser;
-
-    console.log(authUser);
-    console.log(`The email is ${authUser.emailAddress}`);
-    console.log(`The password is ${authUser.password}`);
 
     return (
       <div className="bounds course--detail">
@@ -133,9 +130,10 @@ export default class CreateCourse extends Component {
     const authUser = context.authenticatedUser;
     const { emailAddress, password } = authUser;
 
+    //Update state with values
     const { title, description, estimatedTime, materialsNeeded } = this.state;
 
-    // Create course
+    // Create course and give them state value
     const course = {
       title,
       description,
@@ -146,6 +144,7 @@ export default class CreateCourse extends Component {
     const { from } = this.props.location.state || {
       from: { pathname: "/" },
     };
+    //Create variables for HTML elements that display errors
     const errorHeader = document.getElementsByClassName(
       "validation--errors--label"
     )[0];
@@ -157,6 +156,7 @@ export default class CreateCourse extends Component {
     context.data
       .createCourse(course, emailAddress, password)
       .then((response) => {
+        //Update HTML error elements with new style attributes based on if there's a title and description or not
         if (response !== null) {
           this.setState({ errors: response });
           if (title.length === 0) {
@@ -180,12 +180,11 @@ export default class CreateCourse extends Component {
             errorDesc.setAttribute("style", "display:none");
           }
         } else {
-          console.log(`The course ${title} is created`);
+          //Course creates and directs to last path
           this.props.history.push(from);
         }
       })
       .catch((err) => {
-        console.log(err);
         this.props.history.push("/error");
       });
   };

@@ -13,6 +13,7 @@ export default class UserSignUp extends Component {
   };
 
   render() {
+    //Create variables to collect from form and give them to state
     const {
       firstName,
       lastName,
@@ -26,6 +27,16 @@ export default class UserSignUp extends Component {
       <div className="bounds">
         <div className="grid-33 centered signin">
           <h1>Sign Up</h1>
+          <div>
+            <h2 className="validation--errors--label">Validation errors</h2>
+            <div className="validation-errors">
+              <ul>
+                <li className="passwordMatch">
+                  Passwords do not match. Please try again.
+                </li>
+              </ul>
+            </div>
+          </div>
           <Form
             cancel={this.cancel}
             errors={errors}
@@ -65,6 +76,7 @@ export default class UserSignUp extends Component {
                   onChange={this.change}
                   placeholder="Password"
                 />
+                <span id="passwordMatch">Passwords not match, try again</span>
                 <input
                   id="confirmPassword"
                   name="confirmPassword"
@@ -94,6 +106,8 @@ export default class UserSignUp extends Component {
 
   submit = () => {
     const { context } = this.props;
+
+    //Create variables from state
     const {
       firstName,
       lastName,
@@ -123,10 +137,12 @@ export default class UserSignUp extends Component {
           }
         })
         .catch((err) => {
-          console.log(err);
+          //catch all error
           this.props.history.push("/error");
         });
     } else {
+      const passwordMatch = document.getElementById("passwordMatch");
+      passwordMatch.setAttribute("style", "display:block");
       console.log("do not match try again");
     }
   };

@@ -806,3 +806,7 @@ form .button-secondary {
 .course--description textarea {
   margin-bottom: 20px;
 }
+
+#passwordMatch {
+  display: none;
+}
