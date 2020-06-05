@@ -12,6 +12,9 @@ export default class CourseDetail extends Component {
   async componentDidMount() {
     try {
       const { context } = this.props;
+
+      const authUser = context.authenticatedUser;
+
       const course = await context.data.getCourse(this.props.match.params.id);
       const owner = course.owner;
 
@@ -42,7 +45,7 @@ export default class CourseDetail extends Component {
             <div className="bounds">
               <div className="grid-100">
                 {/*Check to see if Auth id matches owner id, if it does display update and delete buttons, if not, don't show those buttons*/}
-                {authUser.id === id ? (
+                {authUser && authUser.id === id ? (
                   <span>
                     <Link
                       className="button"

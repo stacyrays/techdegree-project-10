@@ -34,6 +34,10 @@ export default class Courses extends Component {
     });
     return (
       <div className="bounds">
+        <div className="bounds">
+          <h1>Courses</h1>
+        </div>
+
         {courses}
         <div className="grid-33">
           <a
