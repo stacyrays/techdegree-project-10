@@ -6,7 +6,9 @@ export default ({ context }) => {
   return (
     <div className="header">
       <div className="bounds">
-        <h1 className="header--logo">City College</h1>
+        <h1 className="header--logo">
+          <a href="/">City College</a>
+        </h1>
         {
           <nav>
             {authUser ? (
