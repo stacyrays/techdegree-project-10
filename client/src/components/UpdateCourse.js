@@ -155,8 +155,12 @@ export default class UpdateCourse extends Component {
           if (!title.length) {
             errorHeader.setAttribute("style", "display:block");
             errorList.setAttribute("style", "display:block");
-            errorTitle.innerHTML = this.state.errors[0];
             errorTitle.setAttribute("style", "display:block");
+            if (this.state.errors[0] === undefined) {
+              errorTitle.innerHTML = "";
+            } else {
+              errorTitle.innerHTML = this.state.errors[0];
+            }
           } else if (title.length > 0) {
             errorHeader.setAttribute("style", "display:none");
             errorList.setAttribute("style", "display:none");
@@ -165,8 +169,12 @@ export default class UpdateCourse extends Component {
           if (!description.length) {
             errorHeader.setAttribute("style", "display:block");
             errorList.setAttribute("style", "display:block");
-            errorDesc.innerHTML = this.state.errors[1];
             errorDesc.setAttribute("style", "display:block");
+            if (this.state.errors[1] === undefined) {
+              errorDesc.innerHTML = "";
+            } else {
+              errorDesc.innerHTML = this.state.errors[1];
+            }
           } else if (description.length > 0) {
             errorHeader.setAttribute("style", "display:none");
             errorList.setAttribute("style", "display:none");

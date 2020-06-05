@@ -785,12 +785,12 @@ form .button-secondary {
 
 /* styles the validation errors */
 .validation--errors--label {
-  color: #7c689b;
+  color: firebrick;
   font-size: 28px;
   display: none;
 }
 .validation-errors ul {
-  color: #7c689b;
+  color: firebrick;
   padding: 15px 0 40px 10px;
   display: none;
 }
