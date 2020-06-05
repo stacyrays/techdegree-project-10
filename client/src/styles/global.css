@@ -278,6 +278,7 @@ body {
 h1 {
   font-size: 36px;
   margin: 20px 15px;
+  color: #999;
 }
 
 /* line 61, ../sass/global.sass */
@@ -345,8 +346,7 @@ p {
   margin: 0 auto;
 }
 
-.course--detail h1,
-.course--detail p {
+.course--detail h1 {
   margin-left: 20px;
 }
 
@@ -541,7 +541,7 @@ p {
 .course--description h2,
 .course--description h3 {
   font-family: "Work Sans", sans-serif;
-  color: #222;
+  color: #999;
   margin-bottom: 30px;
 }
 /* line 235, ../sass/global.sass */
