@@ -788,6 +788,10 @@ form .button-secondary {
   color: firebrick;
   font-size: 28px;
   display: none;
+  margin-left: 20px;
+}
+.validation-errors {
+  margin-left: 13px;
 }
 .validation-errors ul {
   color: firebrick;

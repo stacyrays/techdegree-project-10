@@ -145,6 +145,10 @@ export default class UpdateCourse extends Component {
     const errorList = errors.getElementsByTagName("UL")[0];
     const errorTitle = document.getElementsByClassName("provide-title")[0];
     const errorDesc = document.getElementsByClassName("provide-desc")[0];
+    errorHeader.setAttribute("style", "display:none");
+    errorList.setAttribute("style", "display:none");
+    errorTitle.setAttribute("style", "display:none");
+    errorDesc.setAttribute("style", "display:none");
 
     context.data
       .updateCourse(course, emailAddress, password)
