@@ -44,7 +44,7 @@ export default class CreateCourse extends Component {
         {authUser.id === id ? (
           <div className="bounds course--detail">
             <h1>Delete Course</h1>
-            <p>Are you sure you want to delete?</p>
+            <p class="deletePage">Are you sure you want to delete?</p>
             <div>
               <Form
                 cancel={this.cancel}

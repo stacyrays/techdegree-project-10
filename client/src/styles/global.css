@@ -298,6 +298,10 @@ p {
   margin-bottom: 30px;
 }
 
+.deletePage {
+  margin-left: 20px;
+}
+
 /* line 70, ../sass/global.sass */
 .bounds {
   max-width: 1250px;
